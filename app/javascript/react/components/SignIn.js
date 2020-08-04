@@ -28,9 +28,7 @@ const SignIn = () => {
         }
       })
       .then((response) => response.json())
-      .then((body) => {
-        debugger;
-      })
+      .then((body) => {})
       .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };
 
