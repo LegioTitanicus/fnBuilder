@@ -36,9 +36,11 @@ const Entry = () => {
     setLanguage(newLanguage);
   };
 
+  const csrfToken = document.querySelector("[name='csrf-token']").content;
+
   const handleSubmit = () => {
     event.preventDefault();
-    fetch(`/api/v1/data`, {
+    fetch(`/api/v1/submissions`, {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({
@@ -49,6 +51,7 @@ const Entry = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken,
       },
     })
       .then((response) => {

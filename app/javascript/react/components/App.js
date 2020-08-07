@@ -10,6 +10,7 @@ import Topnav from "./Topnav";
 import SignIn from "./SignIn";
 import Entry from "./Entry";
 import Rate from "./Rate";
+import LandingPage from "./LandingPage";
 
 import CodeEditor from "./CodeEditor";
 
@@ -49,7 +50,12 @@ export const App = (props) => {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Topnav darkMode={darkMode} handleDarkMode={handleDarkMode} />
-          <Paper variant="outlined" style={{ height: "80vh" }}>
+          <Paper
+            variant="outlined"
+            style={{ height: "120vh", paddingTop: "70px" }}
+          >
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/home" component={LandingPage} />
             <Route exact path="/users/sign_in" component={SignIn} />
             <Route exact path="/entry" component={Entry} />
             <Route exact path="/rate" component={Rate} />

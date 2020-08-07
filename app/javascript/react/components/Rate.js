@@ -5,13 +5,14 @@ import { Typography, Button } from "@material-ui/core";
 import CodeEditor from "./CodeEditor";
 import TranslationField from "./TranslationField";
 import LanguageButtons from "./LanguageButtons";
+import Stars from "./Stars";
 
 const useStyles = makeStyles((theme) => ({
   //   root: {
   //     display: "flex",
   //     flexWrap: "wrap",
   //   },
-  entryPage: {
+  ratePage: {
     textAlign: "center",
   },
 }));
@@ -22,6 +23,8 @@ const Rate = () => {
   const [language, setLanguage] = useState("javascript");
   const [codeBlock, setCodeBlock] = useState("");
   const [translationField, setTranslationField] = useState("");
+
+  const fetchNew = () => {};
 
   const handleSubmit = () => {
     event.preventDefault();
@@ -55,16 +58,19 @@ const Rate = () => {
   };
 
   return (
-    <div className={classes.entryPage}>
+    <div className={classes.ratePage}>
+      <Stars />
+      <Button variant="contained" color="secondary" onClick={handleSubmit}>
+        Rate
+      </Button>
+      <Typography>Select Language</Typography>
       <LanguageButtons language={language} />
+      <Button onClick={fetchNew}>Get New Block</Button>
       <CodeEditor language={language} codeBlock={codeBlock} />
       <br />
       <Typography>Translation:</Typography>
       <TranslationField translationField={translationField} />
       <br />
-      <Button variant="contained" color="secondary" onClick={handleSubmit}>
-        Submit
-      </Button>
     </div>
   );
 };

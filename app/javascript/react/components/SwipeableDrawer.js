@@ -65,6 +65,11 @@ const MuiDrawer = (props) => {
 
   const itemList = [
     {
+      id: 0,
+      text: "Home",
+      icon: <FunctionsIcon />,
+    },
+    {
       id: 1,
       text: "Teach",
       icon: <FunctionsIcon />,
