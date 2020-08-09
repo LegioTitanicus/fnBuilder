@@ -6,6 +6,8 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const csrfToken = document.querySelector("[name='csrf-token']").content;
+
   const handleSubmit = () => {
     event.preventDefault();
     fetch(`/users/sign_in`, {
@@ -18,6 +20,9 @@ const SignIn = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken,
+        email: email,
+        password: password,
       },
     })
       .then((response) => {
@@ -30,9 +35,7 @@ const SignIn = () => {
         }
       })
       .then((response) => response.json())
-      .then((body) => {
-        debugger;
-      })
+      .then((body) => {})
       .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };
 
@@ -53,7 +56,9 @@ const SignIn = () => {
         onChange={(e) => setPassword(e.target.value)}
         variant="outlined"
       />
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button color="secondary" onClick={handleSubmit}>
+        Submit
+      </Button>
     </div>
   );
 };
