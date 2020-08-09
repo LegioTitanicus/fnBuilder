@@ -23,11 +23,15 @@ const Rate = () => {
   const [language, setLanguage] = useState("javascript");
   const [codeBlock, setCodeBlock] = useState("");
   const [translationField, setTranslationField] = useState("");
+  const [showBlock, setShowBlock] = useState(false);
 
-  const fetchNew = () => {};
+  const fetchNew = () => {
+    setShowBlock(!showBlock);
+  };
 
   const handleSubmit = () => {
     event.preventDefault();
+    setShowBlock(!showBlock);
     fetch(`/api/v1/data`, {
       method: "POST",
       credentials: "same-origin",
@@ -59,18 +63,37 @@ const Rate = () => {
 
   return (
     <div className={classes.ratePage}>
-      <Stars />
-      <Button variant="contained" color="secondary" onClick={handleSubmit}>
-        Rate
-      </Button>
-      <Typography>Select Language</Typography>
-      <LanguageButtons language={language} />
-      <Button onClick={fetchNew}>Get New Block</Button>
-      <CodeEditor language={language} codeBlock={codeBlock} />
-      <br />
-      <Typography>Translation:</Typography>
-      <TranslationField translationField={translationField} />
-      <br />
+      <Typography>Rate other users submissions</Typography>
+      {showBlock ? (
+        <div id="getNewBlock"></div>
+      ) : (
+        <>
+          <Typography>Select Language</Typography>
+          <LanguageButtons language={language} />
+          <Button onClick={fetchNew} color="secondary" variant="outlined">
+            Get New Block
+          </Button>
+        </>
+      )}
+      {showBlock ? (
+        <>
+          <CodeEditor
+            language={language}
+            codeBlock={codeBlock}
+            readOnly={true}
+          />
+          <br />
+          <Typography>Translation:</Typography>
+          <TranslationField translationField={translationField} />
+          <br />
+          <Stars />
+          <Button variant="contained" color="secondary" onClick={handleSubmit}>
+            Rate
+          </Button>
+        </>
+      ) : (
+        <div id="fetchedBlockOnceTrue"></div>
+      )}
     </div>
   );
 };

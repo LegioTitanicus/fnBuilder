@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CodeEditor = (props) => {
-  const { language, codeBlock, onEditorChange } = props;
+  const { language, codeBlock, onEditorChange, readOnly } = props;
   const classes = useStyles();
   const [editorTheme, setEditorTheme] = useState("monokai");
 
@@ -58,6 +58,7 @@ const CodeEditor = (props) => {
               enableBasicAutocompletion: false,
               enableLiveAutocompletion: true,
             }}
+            readOnly={readOnly || false}
           />
           {/* </Paper> */}
         </Grid>
