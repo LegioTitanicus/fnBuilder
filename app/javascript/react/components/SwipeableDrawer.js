@@ -14,6 +14,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 import CodeIcon from "@material-ui/icons/Code";
 import ForumIcon from "@material-ui/icons/Forum"; // Collaborate?
 import FunctionsIcon from "@material-ui/icons/Functions"; //Teach?
+import HomeIcon from "@material-ui/icons/Home";
 
 const drawerWidth = 440;
 
@@ -67,7 +68,7 @@ const MuiDrawer = (props) => {
     {
       id: 0,
       text: "Home",
-      icon: <FunctionsIcon />,
+      icon: <HomeIcon />,
     },
     {
       id: 1,
