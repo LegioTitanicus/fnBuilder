@@ -1,18 +1,19 @@
 import React, { useState, cloneElement } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+import {
+  AppBar,
+  Toolbar,
+  Switch,
+  Button,
+  useScrollTrigger,
+  Typography,
+  Grid,
+  useMediaQuery,
+} from "@material-ui/core";
+
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import BrightnessMediumIcon from "@material-ui/icons/BrightnessMedium";
-import Switch from "@material-ui/core/Switch";
-import Button from "@material-ui/core/Button";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-
-import Typography from "@material-ui/core/Typography";
-
-import { Grid } from "@material-ui/core";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import MuiDrawer from "./SwipeableDrawer";
 

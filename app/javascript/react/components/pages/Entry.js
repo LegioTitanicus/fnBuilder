@@ -2,37 +2,45 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button } from "@material-ui/core";
 
-import CodeEditor from "./CodeEditor";
-import TranslationField from "./TranslationField";
-import LanguageButtons from "./LanguageButtons";
-import Stars from "./Stars";
+import CodeEditor from "../ui/CodeEditor";
+import TranslationField from "../ui/TranslationField";
+import LanguageButtons from "../ui/LanguageButtons";
 
 const useStyles = makeStyles((theme) => ({
   //   root: {
   //     display: "flex",
   //     flexWrap: "wrap",
   //   },
-  ratePage: {
+  entryPage: {
     textAlign: "center",
   },
 }));
 
-const Rate = () => {
+const Entry = () => {
   const classes = useStyles();
 
   const [language, setLanguage] = useState("javascript");
   const [codeBlock, setCodeBlock] = useState("");
   const [translationField, setTranslationField] = useState("");
-  const [showBlock, setShowBlock] = useState(false);
 
-  const fetchNew = () => {
-    setShowBlock(!showBlock);
+  const handleChange = (event) => {
+    setTranslationField(event.target.value);
   };
+
+  const onEditorChange = (newValue) => {
+    setCodeBlock(newValue);
+  };
+
+  const handleLanguage = (event, newLanguage) => {
+    setLanguage("");
+    setLanguage(newLanguage);
+  };
+
+  const csrfToken = document.querySelector("[name='csrf-token']").content;
 
   const handleSubmit = () => {
     event.preventDefault();
-    setShowBlock(!showBlock);
-    fetch(`/api/v1/data`, {
+    fetch(`/api/v1/submissions`, {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({
@@ -43,6 +51,7 @@ const Rate = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken,
       },
     })
       .then((response) => {
@@ -62,40 +71,25 @@ const Rate = () => {
   };
 
   return (
-    <div className={classes.ratePage}>
-      <Typography>Rate other users submissions</Typography>
-      {showBlock ? (
-        <div id="getNewBlock"></div>
-      ) : (
-        <>
-          <Typography>Select Language</Typography>
-          <LanguageButtons language={language} />
-          <Button onClick={fetchNew} color="secondary" variant="outlined">
-            Get New Block
-          </Button>
-        </>
-      )}
-      {showBlock ? (
-        <>
-          <CodeEditor
-            language={language}
-            codeBlock={codeBlock}
-            readOnly={true}
-          />
-          <br />
-          <Typography>Translation:</Typography>
-          <TranslationField translationField={translationField} />
-          <br />
-          <Stars />
-          <Button variant="contained" color="secondary" onClick={handleSubmit}>
-            Rate
-          </Button>
-        </>
-      ) : (
-        <div id="fetchedBlockOnceTrue"></div>
-      )}
+    <div className={classes.entryPage}>
+      <LanguageButtons handleLanguage={handleLanguage} language={language} />
+      <CodeEditor
+        language={language}
+        codeBlock={codeBlock}
+        onEditorChange={onEditorChange}
+      />
+      <br />
+      <Typography>Enter translation below:</Typography>
+      <TranslationField
+        translationField={translationField}
+        handleChange={handleChange}
+      />
+      <br />
+      <Button variant="contained" color="secondary" onClick={handleSubmit}>
+        Submit
+      </Button>
     </div>
   );
 };
 
-export default Rate;
+export default Entry;

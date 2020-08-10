@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  SwipeableDrawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import ChatIcon from "@material-ui/icons/Chat";
+import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
 import CodeIcon from "@material-ui/icons/Code";
 import ForumIcon from "@material-ui/icons/Forum"; // Collaborate?
 import FunctionsIcon from "@material-ui/icons/Functions"; //Teach?
 import HomeIcon from "@material-ui/icons/Home";
+import BlurOnIcon from "@material-ui/icons/BlurOn";
 
 const drawerWidth = 440;
 
@@ -66,29 +70,40 @@ const MuiDrawer = (props) => {
 
   const itemList = [
     {
-      id: 0,
+      id: 1,
       text: "Home",
+      link: "home",
       icon: <HomeIcon />,
     },
     {
-      id: 1,
-      text: "Teach",
-      icon: <FunctionsIcon />,
-    },
-    {
-      id: 3,
+      id: 2,
       text: "Code",
+      link: "entry",
       icon: <CodeIcon />,
     },
     {
-      id: 2,
+      id: 3,
+      text: "Teach",
+      link: "rate",
+      icon: <FunctionsIcon />,
+    },
+    {
+      id: 4,
+      text: "Predict",
+      link: "predict",
+      icon: <BlurOnIcon />, // or possibly allInclusive icon
+    },
+    {
+      id: 5,
       text: "Collaborate",
+      link: "collaborate",
       icon: <ForumIcon />,
     },
 
     {
-      id: 4,
+      id: 6,
       text: "About",
+      link: "about",
       icon: <AssignmentIcon />,
     },
   ];
@@ -97,7 +112,7 @@ const MuiDrawer = (props) => {
     <div onClick={handleDrawerToggle}>
       <List>
         {itemList.map((page) => (
-          <ListItem button key={page.id} component={Link} to={`/${page.text}`}>
+          <ListItem button key={page.id} component={Link} to={`/${page.link}`}>
             <ListItemIcon>{page.icon}</ListItemIcon>
             <ListItemText primary={page.text} />
           </ListItem>

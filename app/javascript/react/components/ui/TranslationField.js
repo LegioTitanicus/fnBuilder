@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
+import { TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +21,7 @@ const TranslationField = (props) => {
     <div className={classes.textField}>
       <TextField
         id="outlined-multiline-flexible"
-        label="Multiline"
+        label="Enter text here"
         multiline
         rowsMax={8}
         value={translationField}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, TextField } from "@material-ui/core";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");

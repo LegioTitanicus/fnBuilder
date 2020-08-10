@@ -2,45 +2,37 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button } from "@material-ui/core";
 
-import CodeEditor from "./CodeEditor";
-import TranslationField from "./TranslationField";
-import LanguageButtons from "./LanguageButtons";
+import CodeEditor from "../ui/CodeEditor";
+import TranslationField from "../ui/TranslationField";
+import LanguageButtons from "../ui/LanguageButtons";
+import Stars from "../ui/Stars";
 
 const useStyles = makeStyles((theme) => ({
   //   root: {
   //     display: "flex",
   //     flexWrap: "wrap",
   //   },
-  entryPage: {
+  ratePage: {
     textAlign: "center",
   },
 }));
 
-const Entry = () => {
+const Rate = () => {
   const classes = useStyles();
 
   const [language, setLanguage] = useState("javascript");
   const [codeBlock, setCodeBlock] = useState("");
   const [translationField, setTranslationField] = useState("");
+  const [showBlock, setShowBlock] = useState(false);
 
-  const handleChange = (event) => {
-    setTranslationField(event.target.value);
+  const fetchNew = () => {
+    setShowBlock(!showBlock);
   };
-
-  const onEditorChange = (newValue) => {
-    setCodeBlock(newValue);
-  };
-
-  const handleLanguage = (event, newLanguage) => {
-    setLanguage("");
-    setLanguage(newLanguage);
-  };
-
-  const csrfToken = document.querySelector("[name='csrf-token']").content;
 
   const handleSubmit = () => {
     event.preventDefault();
-    fetch(`/api/v1/submissions`, {
+    setShowBlock(!showBlock);
+    fetch(`/api/v1/data`, {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({
@@ -51,7 +43,6 @@ const Entry = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "X-CSRF-Token": csrfToken,
       },
     })
       .then((response) => {
@@ -71,25 +62,40 @@ const Entry = () => {
   };
 
   return (
-    <div className={classes.entryPage}>
-      <LanguageButtons handleLanguage={handleLanguage} language={language} />
-      <CodeEditor
-        language={language}
-        codeBlock={codeBlock}
-        onEditorChange={onEditorChange}
-      />
-      <br />
-      <Typography>Enter translation below:</Typography>
-      <TranslationField
-        translationField={translationField}
-        handleChange={handleChange}
-      />
-      <br />
-      <Button variant="contained" color="secondary" onClick={handleSubmit}>
-        Submit
-      </Button>
+    <div className={classes.ratePage}>
+      <Typography>Rate other users submissions</Typography>
+      {showBlock ? (
+        <div id="getNewBlock"></div>
+      ) : (
+        <>
+          <Typography>Select Language</Typography>
+          <LanguageButtons language={language} />
+          <Button onClick={fetchNew} color="secondary" variant="outlined">
+            Get New Block
+          </Button>
+        </>
+      )}
+      {showBlock ? (
+        <>
+          <CodeEditor
+            language={language}
+            codeBlock={codeBlock}
+            readOnly={true}
+          />
+          <br />
+          <Typography>Translation:</Typography>
+          <TranslationField translationField={translationField} />
+          <br />
+          <Stars />
+          <Button variant="contained" color="secondary" onClick={handleSubmit}>
+            Rate
+          </Button>
+        </>
+      ) : (
+        <div id="fetchedBlockOnceTrue"></div>
+      )}
     </div>
   );
 };
 
-export default Entry;
+export default Rate;
