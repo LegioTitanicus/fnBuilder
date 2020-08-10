@@ -1,6 +1,5 @@
 import React from "react";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 
 const ThemeButtons = (props) => {
   const { editorTheme, handleThemeChange } = props;

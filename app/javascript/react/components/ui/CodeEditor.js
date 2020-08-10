@@ -9,8 +9,7 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-terminal";
 import "ace-builds/src-noconflict/ext-language_tools";
 import { Paper, Grid, makeStyles } from "@material-ui/core";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 
 import ThemeButtons from "./ThemeButtons";
 
@@ -51,7 +50,7 @@ const CodeEditor = (props) => {
             placeholder="code here..."
             name="UNIQUE_ID_OF_DIV"
             editorProps={{ $blockScrolling: true }}
-            height="50vh"
+            height="45vh"
             width="80vw"
             fontSize={14}
             setOptions={{

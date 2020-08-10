@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, BrowserRouter, Link } from "react-router-dom";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { Paper } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Paper, CssBaseline, TextField, Button } from "@material-ui/core";
 
-import Topnav from "./Topnav";
-import SignIn from "./SignIn";
-import Entry from "./Entry";
-import Rate from "./Rate";
-import LandingPage from "./LandingPage";
+import Topnav from "./ui/Topnav";
 
-import CodeEditor from "./CodeEditor";
+import LandingPage from "./pages/LandingPage";
+import SignIn from "./pages/SignIn";
+import Entry from "./pages/Entry";
+import Predict from "./pages/Predict";
+import Rate from "./pages/Rate";
+import About from "./pages/About";
+import Collaborate from "./pages/Collaborate";
+import Footer from "./ui/Footer";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
+  },
+}));
 
 export const App = (props) => {
+  const classes = useStyles();
   const [darkMode, setDarkMode] = useState(true);
 
   // const [loginState, setLoginState] = useState({
@@ -45,7 +55,7 @@ export const App = (props) => {
   };
 
   return (
-    <>
+    <div className={classes.root}>
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <BrowserRouter>
@@ -59,15 +69,14 @@ export const App = (props) => {
             <Route exact path="/users/sign_in" component={SignIn} />
             <Route exact path="/entry" component={Entry} />
             <Route exact path="/rate" component={Rate} />
-            <Link to={`/users/sign_in`}>sign in</Link>
-            <br />
-            <Link to={`/entry`}>entry</Link>
-            <br />
-            <Link to={`/rate`}>rate</Link>
+            <Route exact path="/predict" component={Predict} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/collaborate" component={Collaborate} />
+            <Footer />
           </Paper>
         </BrowserRouter>
       </ThemeProvider>
-    </>
+    </div>
   );
 };
 
