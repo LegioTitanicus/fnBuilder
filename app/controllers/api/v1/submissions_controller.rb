@@ -1,7 +1,7 @@
 class Api::V1::SubmissionsController < ApplicationController
     def create
         @submission = Submission.new(submission_params)
-        @submission.save!
+        # @submission.save!
 
         if @submission.save 
             render json: { notice: "Code translation submitted successfully!" }
@@ -15,6 +15,9 @@ class Api::V1::SubmissionsController < ApplicationController
     def index
         @submissions = Submission.all
         @submission = Submission.all.sample
+        @submissionJS = Submission.find_by(language: "javascript").sample
+        @submissionRB = Submission.find_by(language: "ruby").sample
+        @submissionPY = Submission.find_by(language: "python").sample
     end 
 
     #permit/sanitization
