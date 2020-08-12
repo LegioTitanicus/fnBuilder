@@ -22,6 +22,7 @@ const Entry = () => {
   const [language, setLanguage] = useState("javascript");
   const [codeBlock, setCodeBlock] = useState("");
   const [translationField, setTranslationField] = useState("");
+  const [notice, setNotice] = useState("");
 
   const handleChange = (event) => {
     setTranslationField(event.target.value);
@@ -65,6 +66,7 @@ const Entry = () => {
       })
       .then((response) => response.json())
       .then((body) => {
+        debugger;
         setNotice(body.notice);
       })
       .catch((error) => console.error(`Error in fetch: ${error.message}`));

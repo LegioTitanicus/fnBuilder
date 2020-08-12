@@ -2,11 +2,11 @@ class Api::V1::SubmissionsController < ApplicationController
     def create
         @submission = Submission.new(submission_params)
         # @submission.save!
-
+        
         if @submission.save 
-            render json: { notice: "Code translation submitted successfully!" }
+            render json: {notice: "Code translation submitted successfully!"} #  
         else
-            render json: { notice: "Error: unable to process submission" }
+            render json: {notice: "Error: unable to process submission"} # 
         end
 
         # redirect_to "/"
@@ -15,9 +15,15 @@ class Api::V1::SubmissionsController < ApplicationController
     def index
         @submissions = Submission.all
         @submission = Submission.all.sample
-        @submissionJS = Submission.find_by(language: "javascript").sample
-        @submissionRB = Submission.find_by(language: "ruby").sample
-        @submissionPY = Submission.find_by(language: "python").sample
+       
+        @submissionsJS = Submission.where(language: "javascript")
+        render :json => @submissionsJS.sample.to_json
+
+        @submissionsRB = Submission.where(language: "ruby")
+        @rb_submission = @submissionsRB.sample
+
+        @submissionsPY = Submission.where(language: "python")
+        @py_submission = @submissionsPY.sample
     end 
 
     #permit/sanitization
