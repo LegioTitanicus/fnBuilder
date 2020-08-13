@@ -66,7 +66,6 @@ const Entry = () => {
       })
       .then((response) => response.json())
       .then((body) => {
-        debugger;
         setNotice(body.notice);
       })
       .catch((error) => console.error(`Error in fetch: ${error.message}`));

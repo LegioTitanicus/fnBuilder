@@ -60,8 +60,9 @@ master = ENV["GOOGLE_CLOUD_FNBUILDER"] == "master"
 gem "google-cloud-language", path: master ? "../../google-cloud-language" : nil
 gem "google-cloud-language-v1", path: master ? "../../google-cloud-language-v1" : nil
 gem "google-cloud-language-v1beta2", path: master ? "../../google-cloud-language-v1beta2" : nil
+gem "google-cloud-storage", path: master ? "../../google-cloud-storage" : nil
+
 
 group :test do
-  gem "google-cloud-storage", path: master ? "../../google-cloud-storage" : nil
   gem "rake"
 end
