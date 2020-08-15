@@ -37,6 +37,11 @@ const Entry = () => {
     setLanguage(newLanguage);
   };
 
+  const clear = () => {
+    setCodeBlock("");
+    setTranslationField("");
+  };
+
   const csrfToken = document.querySelector("[name='csrf-token']").content;
 
   const handleSubmit = () => {
@@ -68,6 +73,7 @@ const Entry = () => {
       .then((body) => {
         setNotice(body.notice);
       })
+      .then(clear())
       .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };
 

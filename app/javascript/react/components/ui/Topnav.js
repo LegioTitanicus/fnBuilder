@@ -50,6 +50,24 @@ const Topnav = (props) => {
     });
   }
 
+  const inOut = !!document.getElementById("sign_in") ? "in" : "out";
+
+  const loginLogout = () => {
+    const inOut = !!document.getElementById("sign_in") ? "in" : "out";
+    return (
+      <Button
+        color="inherit"
+        // href={`/users/sign_${inOut}`}
+        onClick={() => {
+          console.log("fn fired");
+          document.getElementById(`sign_${inOut}`).click();
+        }}
+      >
+        Log{inOut}
+      </Button>
+    );
+  };
+
   const handleDrawerToggle = () => {
     console.log("toggle menu");
     setMobileOpen(!mobileOpen);
@@ -73,7 +91,7 @@ const Topnav = (props) => {
               name="checkedB"
               inputProps={{ "aria-label": "primary checkbox" }}
             />
-            <Button color="inherit">Login</Button>
+            {loginLogout()}
           </Toolbar>
         </AppBar>
       </ElevationScroll>
