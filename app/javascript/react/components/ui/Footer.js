@@ -1,14 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
+import { Container, Typography, Link, Paper } from "@material-ui/core";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="http://google.com">
+      <Link color="inherit" href="https://www.linkedin.com/in/alex-bernstein/">
         Alex Bernstein
       </Link>{" "}
       {new Date().getFullYear()}
@@ -34,9 +32,9 @@ const Footer = (props) => {
   return (
     <footer className={classes.footer}>
       <Container maxWidth="lg">
-        <Typography variant="h6" align="center" gutterBottom>
+        <Typography variant="h6" align="center">
           Want to help?{" "}
-          <Link href="mailto:alexbernstein7170@gmail.com">
+          <Link href="mailto:alexbernstein7170@gmail.com" color="inherit">
             Please reach out!
           </Link>
         </Typography>
