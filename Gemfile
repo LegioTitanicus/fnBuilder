@@ -52,3 +52,17 @@ gem 'valid_attribute', group: [:development, :test]
 gem 'shoulda-matchers', group: [:development, :test], require: false
 gem 'devise'
 gem 'webpacker', '~> 3.3'
+
+gem "active_model_serializers"
+
+master = ENV["GOOGLE_CLOUD_FNBUILDER"] == "master"
+
+gem "google-cloud-language", path: master ? "../../google-cloud-language" : nil
+gem "google-cloud-language-v1", path: master ? "../../google-cloud-language-v1" : nil
+gem "google-cloud-language-v1beta2", path: master ? "../../google-cloud-language-v1beta2" : nil
+gem "google-cloud-storage", path: master ? "../../google-cloud-storage" : nil
+
+
+group :test do
+  gem "rake"
+end

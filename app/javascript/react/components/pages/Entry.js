@@ -22,6 +22,7 @@ const Entry = () => {
   const [language, setLanguage] = useState("javascript");
   const [codeBlock, setCodeBlock] = useState("");
   const [translationField, setTranslationField] = useState("");
+  const [notice, setNotice] = useState("");
 
   const handleChange = (event) => {
     setTranslationField(event.target.value);

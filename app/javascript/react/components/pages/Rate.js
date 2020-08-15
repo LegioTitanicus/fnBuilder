@@ -25,24 +25,18 @@ const Rate = () => {
   const [translationField, setTranslationField] = useState("");
   const [showBlock, setShowBlock] = useState(false);
 
-  const fetchNew = () => {
-    setShowBlock(!showBlock);
-  };
+  const csrfToken = document.querySelector("[name='csrf-token']").content;
 
-  const handleSubmit = () => {
+  const fetchNew = () => {
     event.preventDefault();
     setShowBlock(!showBlock);
-    fetch(`/api/v1/data`, {
-      method: "POST",
+    fetch(`/api/v1/submissions`, {
+      method: "GET",
       credentials: "same-origin",
-      body: JSON.stringify({
-        language: language,
-        codeBlock: codeBlock,
-        translation: translationField,
-      }),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken,
       },
     })
       .then((response) => {
@@ -56,7 +50,28 @@ const Rate = () => {
       })
       .then((response) => response.json())
       .then((body) => {
-        setNotice(body.notice);
+        setCodeBlock(body.codeBlock);
+        setTranslationField(body.translation);
+      })
+      .catch((error) => console.error(`Error in fetch: ${error.message}`));
+  };
+
+  const handleSubmit = () => {
+    event.preventDefault();
+    setShowBlock(!showBlock);
+    fetch(`/api/v1/submissions`)
+      .then((response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          const errorMessage = `${response.status} (${response.statusText})`;
+          const error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then((response) => response.json())
+      .then((body) => {
+        alert(body.language);
       })
       .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };

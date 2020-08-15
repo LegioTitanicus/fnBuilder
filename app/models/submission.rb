@@ -4,4 +4,5 @@ class Submission < ApplicationRecord
     validates :translation, presence: true
 
     # belongs_to :user
+    # has_many :rating
 end 

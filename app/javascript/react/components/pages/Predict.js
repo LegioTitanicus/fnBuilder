@@ -30,6 +30,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Predict = () => {
+  const handleSubmit = () => {
+    event.preventDefault();
+    fetch(`https://automl.googleapis.com/v1beta1/{parent}/datasets`, {
+      method: "POST",
+      credentials: "same-origin",
+      body: JSON.stringify({
+        language: language,
+        codeBlock: codeBlock,
+        translation: translationField,
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          const errorMessage = `${response.status} (${response.statusText})`;
+          const error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then((response) => response.json())
+      .then((body) => {
+        setNotice(body.notice);
+      })
+      .catch((error) => console.error(`Error in fetch: ${error.message}`));
+  };
+
   const classes = useStyles();
   const [showProgress, setShowProgress] = useState(false);
 
