@@ -1,5 +1,5 @@
 translation,codeBlock
-print '1' to the screen,const printNumber console.log('1')
+print '1' to the screen,const printNumber console.log('n')
 print '2' to the screen,const printNumber console.log('2')
 print '3' to the screen,const printNumber console.log('3')
 print '4' to the screen,const printNumber console.log('4')

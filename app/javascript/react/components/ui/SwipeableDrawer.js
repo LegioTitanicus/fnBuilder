@@ -102,8 +102,8 @@ const MuiDrawer = (props) => {
 
     {
       id: 6,
-      text: "About",
-      link: "about",
+      text: "My Submissions",
+      link: "submissions",
       icon: <AssignmentIcon />,
     },
   ];

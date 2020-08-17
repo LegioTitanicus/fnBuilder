@@ -5,14 +5,15 @@ import {
   LinearProgress,
   Zoom,
   Paper,
+  TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import TranslationField from "../ui/TranslationField";
+import Aug_11_GCP_api_calls from "../images/Aug_11_GCP_api_calls.png";
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    marginTop: "8%",
+    marginTop: "5%",
     textAlign: "center",
   },
   button: {
@@ -27,9 +28,22 @@ const useStyles = makeStyles((theme) => ({
     width: "80%",
     marginLeft: "10%",
   },
+  textField: {
+    marginLeft: "3vw",
+    marginRight: "3vw",
+  },
+  pic: {
+    maxWidth: "80%",
+    marginTop: "3%",
+    marginBottom: "3%",
+  },
 }));
 
 const Predict = () => {
+  const classes = useStyles();
+  const [translationField, setTranslationField] = useState("");
+  const [showProgress, setShowProgress] = useState(false);
+
   const handleSubmit = () => {
     event.preventDefault();
     fetch(`https://automl.googleapis.com/v1beta1/{parent}/datasets`, {
@@ -62,20 +76,39 @@ const Predict = () => {
       .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };
 
-  const classes = useStyles();
-  const [showProgress, setShowProgress] = useState(false);
-
   const think = () => {
     setShowProgress(!showProgress);
+  };
+
+  const handleChange = (event) => {
+    setTranslationField(event.target.value);
   };
 
   return (
     <div className={classes.pageContent}>
       <Typography variant="h4" className={classes.title}>
-        Predict
+        Feature in development, exciting things await!
       </Typography>
-      <TranslationField />
-      <Button className={classes.button} variant="contained" onClick={think}>
+      <img className={classes.pic} src={Aug_11_GCP_api_calls} />
+      <div className={classes.textField}>
+        <TextField
+          id="outlined-multiline-flexible"
+          label="Enter text here"
+          multiline
+          rowsMax={8}
+          value={translationField}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          disabled
+        />
+      </div>
+      <Button
+        className={classes.button}
+        variant="contained"
+        onClick={think}
+        disabled
+      >
         Write my code!
       </Button>
       <br />

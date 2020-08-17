@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, TextField } from "@material-ui/core";
 
 import CodeEditor from "../ui/CodeEditor";
 import TranslationField from "../ui/TranslationField";
@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
   //   },
   ratePage: {
     textAlign: "center",
+  },
+  textField: {
+    marginLeft: "3vw",
+    marginRight: "3vw",
   },
 }));
 
@@ -54,6 +58,10 @@ const Rate = () => {
         setTranslationField(body.translation);
       })
       .catch((error) => console.error(`Error in fetch: ${error.message}`));
+  };
+
+  const handleChange = (event) => {
+    setTranslationField(event.target.value);
   };
 
   const handleSubmit = () => {
@@ -99,7 +107,18 @@ const Rate = () => {
           />
           <br />
           <Typography>Translation:</Typography>
-          <TranslationField translationField={translationField} />
+          <div className={classes.textField}>
+            <TextField
+              id="outlined-multiline-flexible"
+              label="Enter text here"
+              multiline
+              rowsMax={8}
+              value={translationField}
+              onChange={handleChange}
+              variant="outlined"
+              fullWidth
+            />
+          </div>
           <br />
           <Stars />
           <Button variant="contained" color="secondary" onClick={handleSubmit}>
