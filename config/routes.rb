@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # get "/login", to: 'homes#index'
   # get "/sign_up", to: "homes#index"
 
-  resources :submissions #, only: [:index, :show]
+  resources :submissions, only: [:index]
 
   namespace :api do
     namespace :v1 do

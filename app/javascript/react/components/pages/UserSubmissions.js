@@ -18,13 +18,22 @@ const UserSubmissions = () => {
     const response = fetch("/api/v1/submissions")
       .then((res) => res.json())
       .then((body) => {
+        debugger;
         setSubmissions(body.submissions);
       });
   }, []);
 
+  let mappedSubmissions = submissions.map((submission) => {
+    return (
+      <div key={submission.id}>
+        <p>{submission.codeBlock}</p>
+      </div>
+    );
+  });
   return (
     <div>
       {/* <Paper className={classes.paper}> */}
+      {mappedSubmissions}
       <Typography variant="h3">UserSubmissions</Typography>
       {/* </Paper> */}
     </div>

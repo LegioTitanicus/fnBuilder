@@ -5,7 +5,7 @@ import { Container, Typography, Link, Paper } from "@material-ui/core";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
+      Copyright ©
       <Link color="inherit" href="https://www.linkedin.com/in/alex-bernstein/">
         Alex Bernstein
       </Link>{" "}
@@ -38,15 +38,9 @@ const Footer = (props) => {
             Please reach out!
           </Link>
         </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p"
-        >
-          {Copyright}
+        <Typography variant="subtitle1" align="center" color="textSecondary">
+          <Copyright />
         </Typography>
-        <Copyright />
       </Container>
     </footer>
   );

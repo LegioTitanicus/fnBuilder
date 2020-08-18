@@ -12,6 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-require_tree.$(function () {
-  $(document);
-});
+// require_tree.$(function () {
+//   $(document);
+// });

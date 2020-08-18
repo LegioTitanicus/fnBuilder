@@ -93,19 +93,19 @@ const MuiDrawer = (props) => {
       link: "predict",
       icon: <BlurOnIcon />, // or possibly allInclusive icon
     },
-    {
-      id: 5,
-      text: "Collaborate",
-      link: "collaborate",
-      icon: <ForumIcon />,
-    },
+    // {
+    //   id: 5,
+    //   text: "Collaborate",
+    //   link: "collaborate",
+    //   icon: <ForumIcon />,
+    // },
 
-    {
-      id: 6,
-      text: "My Submissions",
-      link: "submissions",
-      icon: <AssignmentIcon />,
-    },
+    // {
+    //   id: 6,
+    //   text: "My Submissions",
+    //   link: "submissions",
+    //   icon: <AssignmentIcon />,
+    // },
   ];
 
   const drawer = (
@@ -123,12 +123,13 @@ const MuiDrawer = (props) => {
 
   return (
     <div>
-      <IconButton>
-        <MenuIcon onClick={handleDrawerToggle} />
+      <IconButton onClick={handleDrawerToggle}>
+        <MenuIcon />
       </IconButton>
       <SwipeableDrawer
         open={mobileOpen}
         onClose={handleDrawerToggle}
+        onOpen={handleDrawerToggle}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
       >

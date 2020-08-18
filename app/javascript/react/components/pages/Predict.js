@@ -10,6 +10,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 import Aug_11_GCP_api_calls from "../images/Aug_11_GCP_api_calls.png";
+import LanguageButtons from "../ui/LanguageButtons";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     marginLeft: "3vw",
     marginRight: "3vw",
+    marginBottom: "3vh",
   },
   pic: {
     maxWidth: "80%",
@@ -93,7 +95,7 @@ const Predict = () => {
       <div className={classes.textField}>
         <TextField
           id="outlined-multiline-flexible"
-          label="Enter text here"
+          label="Describe the code you want"
           multiline
           rowsMax={8}
           value={translationField}
@@ -103,6 +105,8 @@ const Predict = () => {
           disabled
         />
       </div>
+      <Typography>Choose a language</Typography>
+      <LanguageButtons />
       <Button
         className={classes.button}
         variant="contained"

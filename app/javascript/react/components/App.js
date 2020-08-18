@@ -17,9 +17,8 @@ import Footer from "./ui/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
+    // display: "flex",
+    // flexDirection: "column",
   },
 }));
 
@@ -62,7 +61,7 @@ export const App = (props) => {
           <Topnav darkMode={darkMode} handleDarkMode={handleDarkMode} />
           <Paper
             variant="outlined"
-            style={{ height: "120vh", paddingTop: "70px" }}
+            style={{ paddingTop: "70px", minHeight: "100vh" }}
           >
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/home" component={LandingPage} />

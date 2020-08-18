@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Button, TextField } from "@material-ui/core";
+import { Typography, Button, TextField, Grid } from "@material-ui/core";
 
 import CodeEditor from "../ui/CodeEditor";
 import TranslationField from "../ui/TranslationField";
@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     marginLeft: "3vw",
     marginRight: "3vw",
+  },
+  starsAndButton: {
+    marginBottom: "3%",
   },
 }));
 
@@ -54,8 +57,8 @@ const Rate = () => {
       })
       .then((response) => response.json())
       .then((body) => {
-        setCodeBlock(body.codeBlock);
-        setTranslationField(body.translation);
+        setCodeBlock(body.submission.codeBlock);
+        setTranslationField(body.submission.translation);
       })
       .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };
@@ -106,24 +109,35 @@ const Rate = () => {
             readOnly={true}
           />
           <br />
-          <Typography>Translation:</Typography>
+          <Typography>User Submitted Translation:</Typography>
           <div className={classes.textField}>
             <TextField
               id="outlined-multiline-flexible"
-              label="Enter text here"
+              label=""
               multiline
               rowsMax={8}
               value={translationField}
               onChange={handleChange}
               variant="outlined"
               fullWidth
+              disabled
             />
           </div>
           <br />
-          <Stars />
-          <Button variant="contained" color="secondary" onClick={handleSubmit}>
-            Rate
-          </Button>
+          <Grid container className={classes.starsAndButton}>
+            <Grid item xs={6} med={6}>
+              <Stars />
+            </Grid>
+            <Grid item xs={6} med={6}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleSubmit}
+              >
+                Rate
+              </Button>
+            </Grid>
+          </Grid>
         </>
       ) : (
         <div id="fetchedBlockOnceTrue"></div>

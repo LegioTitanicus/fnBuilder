@@ -1,5 +1,5 @@
 class Rating < ApplicationRecord
-    validates :rating
+    validates :rating, presence: true
     
     belongs_to :submission
     belongs_to :user

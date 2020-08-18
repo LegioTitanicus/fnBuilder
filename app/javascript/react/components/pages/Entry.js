@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Button, TextField } from "@material-ui/core";
 import { useHistory } from "react-router";
-import createHistory from "history/createBrowserHistory";
 import { Router } from "react-router";
 
 import CodeEditor from "../ui/CodeEditor";
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Entry = (props) => {
   const classes = useStyles();
-  const history = useHistory();
+  // const history = useHistory();
 
   const [language, setLanguage] = useState("javascript");
   const [codeBlock, setCodeBlock] = useState("");
@@ -93,13 +92,11 @@ const Entry = (props) => {
       })
       .then((response) => response.json())
       .then((body) => {
-        debugger;
         setNotice(body.notice);
         clear();
-        // manualClear();
+        // window.location.href = "/";
       })
       .catch((error) => console.error(`Error in fetch: ${error.message}`));
-    // window.location.href = "/";
   };
 
   return (
