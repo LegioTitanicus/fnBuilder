@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, TextField } from "@material-ui/core";
+import { useHistory } from "react-router";
+import { Router } from "react-router";
 
 import CodeEditor from "../ui/CodeEditor";
 import TranslationField from "../ui/TranslationField";
@@ -14,10 +16,22 @@ const useStyles = makeStyles((theme) => ({
   entryPage: {
     textAlign: "center",
   },
+  textField: {
+    marginLeft: "3vw",
+    marginRight: "3vw",
+  },
+  buttons: {
+    marginTop: "20px",
+    marginBottom: "20px",
+  },
+  submit: {
+    marginBottom: "5%",
+  },
 }));
 
-const Entry = () => {
+const Entry = (props) => {
   const classes = useStyles();
+  // const history = useHistory();
 
   const [language, setLanguage] = useState("javascript");
   const [codeBlock, setCodeBlock] = useState("");
@@ -41,6 +55,13 @@ const Entry = () => {
     setCodeBlock("");
     setTranslationField("");
   };
+
+  // useEffect(() => {
+  //   let aceEditor = document.getElementsByClassName(
+  //     "ace_layer ace_text-layer"
+  //   )[0];
+  //   aceEditor.innerHTML = "";
+  // }, [codeBlock]);
 
   const csrfToken = document.querySelector("[name='csrf-token']").content;
 
@@ -72,14 +93,19 @@ const Entry = () => {
       .then((response) => response.json())
       .then((body) => {
         setNotice(body.notice);
+        clear();
+        // window.location.href = "/";
       })
-      .then(clear())
       .catch((error) => console.error(`Error in fetch: ${error.message}`));
   };
 
   return (
     <div className={classes.entryPage}>
-      <LanguageButtons handleLanguage={handleLanguage} language={language} />
+      <LanguageButtons
+        handleLanguage={handleLanguage}
+        language={language}
+        className={classes.buttons}
+      />
       <CodeEditor
         language={language}
         codeBlock={codeBlock}
@@ -87,12 +113,25 @@ const Entry = () => {
       />
       <br />
       <Typography>Enter translation below:</Typography>
-      <TranslationField
-        translationField={translationField}
-        handleChange={handleChange}
-      />
+      <div className={classes.textField}>
+        <TextField
+          id="outlined-multiline-flexible"
+          label="Enter text here"
+          multiline
+          rowsMax={8}
+          value={translationField}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+        />
+      </div>
       <br />
-      <Button variant="contained" color="secondary" onClick={handleSubmit}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleSubmit}
+        className={classes.submit}
+      >
         Submit
       </Button>
     </div>

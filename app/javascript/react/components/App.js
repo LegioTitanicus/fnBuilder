@@ -11,15 +11,14 @@ import SignIn from "./pages/SignIn";
 import Entry from "./pages/Entry";
 import Predict from "./pages/Predict";
 import Rate from "./pages/Rate";
-import About from "./pages/About";
+import UserSubmissions from "./pages/UserSubmissions";
 import Collaborate from "./pages/Collaborate";
 import Footer from "./ui/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
+    // display: "flex",
+    // flexDirection: "column",
   },
 }));
 
@@ -62,7 +61,7 @@ export const App = (props) => {
           <Topnav darkMode={darkMode} handleDarkMode={handleDarkMode} />
           <Paper
             variant="outlined"
-            style={{ height: "120vh", paddingTop: "70px" }}
+            style={{ paddingTop: "70px", minHeight: "100vh" }}
           >
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/home" component={LandingPage} />
@@ -70,7 +69,7 @@ export const App = (props) => {
             <Route exact path="/entry" component={Entry} />
             <Route exact path="/rate" component={Rate} />
             <Route exact path="/predict" component={Predict} />
-            <Route exact path="/about" component={About} />
+            <Route exact path="/submissions" component={UserSubmissions} />
             <Route exact path="/collaborate" component={Collaborate} />
             <Footer />
           </Paper>

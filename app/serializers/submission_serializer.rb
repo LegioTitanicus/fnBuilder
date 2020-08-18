@@ -1,3 +1,3 @@
 class SubmissionSerializer < ActiveModel::Serializer
-  attributes :id, :create, :"app/serializers/submission_serializer.rb"
+  attributes :id, :language, :codeBlock, :translation
 end

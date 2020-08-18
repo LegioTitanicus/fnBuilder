@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Submission, type: :model do
   it "is valid with valid attributes" do
-    expect(Submission.new(language: "javascript", codeBlock: "console.log('hello world')", translation: "print hello world").to be_valid
+    expect(Submission.new(language: "javascript", codeBlock: "console.log('hello world')", translation: "print hello world")).to be_valid
   end
 
   it { should have_valid(:language).when("javascript") }

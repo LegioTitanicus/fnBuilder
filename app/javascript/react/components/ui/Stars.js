@@ -4,9 +4,9 @@ import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 
 const labels = {
-  1: "No",
-  2: "A child found their way onto the site",
-  3: "So-so",
+  1: "Wrong language",
+  2: "Needs improvement",
+  3: "Okay",
   4: "Big brain",
   5: "Supahot",
 };

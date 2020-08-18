@@ -1,14 +1,12 @@
 require "pry"
 require "google/cloud/language"
 
-
-
 class Api::V1::SubmissionsController < ApplicationController
     def create
         @submission = Submission.new(submission_params)
-        # @submission.save!
-        
-        if @submission.save 
+        @submission.user_id = current_user.id
+
+        if @submission.save!
             # write thing that was just created on a new line in CSV file
             render json: {notice: "Code translation submitted successfully!"} #  
         else
@@ -19,56 +17,55 @@ class Api::V1::SubmissionsController < ApplicationController
     end
     
     def index
-        google_key = ENV["GOOGLE_APPLICATION_CREDENTIALS"]
-        test = ENV["TEST"]
-        keys = ENV.keys
-        # Instantiates a client
-        # This is the line that essentially makes the API call with credentials, etc
-        language = Google::Cloud::Language.language_service
-        
-        # The text to analyze
-        # textN = "I hate you. You're the worst, never again, hope you die."
-        textP = "I love you. You're the best, an angel."
-        # Detects the sentiment of the text
-        documentP = { content: textP, type: :PLAIN_TEXT }
-        responseP = language.analyze_sentiment document: documentP
+        user_subs = current_user.submissions
+        # user_subs.each do |submission|
+        #     total_score = 0
+        #     submission.ratings.each |rating|
+        #         total_score += rating
+        #     end
+        #     average = total_score / submission.ratings.length
+            
+        #     submission["id"]["average"] = average
+        # end
+        render json: user_subs
         
 
+        # offset = rand(Submission.count)
+        # rand_record = Submission.offset(offset).first
+
         
-        # documentN = { content: textN, type: :PLAIN_TEXT }
-        # responseN = language.analyze_sentiment document: documentN
+        # render json: Submission.where(user_id: current_user.id)
+        #if submissions.length == 0
+         #   render json: { submissions: {} }
+        #else 
+         #   render json: submissions 
+        #end 
         
-        # Get document sentiment from response
-        sentimentP = responseP.document_sentiment
-        binding.pry
-        puts "Text: #{textP}"
-        puts "Score: #{sentimentP.score}, #{sentimentP.magnitude}"
-        
-        # sentimentN = responseN.document_sentiment
-        
-        # puts "Text: #{textN}"
-        # puts "Score: #{sentimentN.score}, #{sentimentN.magnitude}"
-        # @submissions = Submission.all
-        # @submission = Submission.all.sample
-       
-        # @submissionsJS = Submission.where(language: "javascript")
-        # render :json => @submissionsJS.sample.to_json
+    end 
 
-        # @submissionsRB = Submission.where(language: "ruby")
-        # @rb_submission = @submissionsRB.sample
+    def show
+        rand_record = Submission.all.sample
+        render json: rand_record
+    end
 
-        # @submissionsPY = Submission.where(language: "python")
-        # @py_submission = @submissionsPY.sample
-        @testTestTest = "Score: #{sentimentP.score}, #{sentimentP.magnitude}"
-        binding.pry
+    def update
+        submission = Submission.find(params[:id])
+        submission.language = params["language"]
+        submission.translation = params["translation"]
+        submission.codeBlock = params["codeBlock"]
+        submission.save
 
-# Imports the Google Cloud client library
+        render json: submission
+    end
 
-end 
+    def destroy
+        submission = Submission.find(params[:id])
+        submission.delete
 
-    #permit/sanitization
-    #params what is sent in the url when you post params doesn't show up, sent via https in the backend.
-    
+        render json: current_user.submissions
+    end
+
+
     def submission_params
         params.require(:submission).permit(:language, :codeBlock, :translation)
     end

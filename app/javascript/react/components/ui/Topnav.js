@@ -1,5 +1,5 @@
 import React, { useState, cloneElement } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -50,7 +50,7 @@ const Topnav = (props) => {
     });
   }
 
-  const inOut = !!document.getElementById("sign_in") ? "in" : "out";
+  // const inOut = !!document.getElementById("sign_in") ? "in" : "out";
 
   const loginLogout = () => {
     const inOut = !!document.getElementById("sign_in") ? "in" : "out";
@@ -59,7 +59,6 @@ const Topnav = (props) => {
         color="inherit"
         // href={`/users/sign_${inOut}`}
         onClick={() => {
-          console.log("fn fired");
           document.getElementById(`sign_${inOut}`).click();
         }}
       >
@@ -99,4 +98,5 @@ const Topnav = (props) => {
   );
 };
 
-export default Topnav;
+// equivalent to <withRouter>Topnav</withRouter>
+export default withRouter(Topnav);

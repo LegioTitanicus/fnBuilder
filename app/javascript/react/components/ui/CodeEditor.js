@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-ruby";
@@ -31,6 +31,13 @@ const CodeEditor = (props) => {
   const handleThemeChange = (event, nextTheme) => {
     setEditorTheme(nextTheme);
   };
+
+  // const manualClear = useEffect(() => {
+  //   let aceEditor = document.getElementsByClassName(
+  //     "ace_layer ace_text-layer"
+  //   )[0];
+  //   aceEditor.innerHTML = "";
+  // }, [codeBlock]);
 
   return (
     <>
