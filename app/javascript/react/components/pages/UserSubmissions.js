@@ -34,7 +34,6 @@ const UserSubmissions = () => {
     <div>
       {/* <Paper className={classes.paper}> */}
       {mappedSubmissions}
-      <Typography variant="h3">UserSubmissions</Typography>
       {/* </Paper> */}
     </div>
   );
