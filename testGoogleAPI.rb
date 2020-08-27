@@ -32,3 +32,4 @@
 
 # # puts "Text: #{textN}"
 # # puts "Score: #{sentimentN.score}, #{sentimentN.magnitude}"
+.
